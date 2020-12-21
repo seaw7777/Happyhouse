@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.MyPageMapper">
+
+	<select id="search" parameterType="map" resultType="MemberDto">
+		select *
+		from member
+		<if test="word != null and word != ''">
+			<if test="key == 'id'">
+				where id like concat('%', #{word}, '%')
+			</if>
+			<if test="key == 'state'">
+				where state = #{word}
+			</if>
+		</if>
+	</select>
+
+	<delete id="delete" parameterType="String">
+		delete 
+		from member
+		where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="MemberDto">
+		update member set pw = #{pw}, name = #{name} , city = #{city} , gu = #{gu} , dong = #{dong}
+		where id = #{id}
+	</update>
+	
+</mapper>

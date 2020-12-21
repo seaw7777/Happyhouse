@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.CoronaMapper">
+
+	<select id="getClinicList"  parameterType="map" resultType="ClinicDto">
+		select *
+		from CoronaClinic
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchType == 'name'">
+				where cname like concat('%', #{searchWord}, '%')
+			</if>
+			<if test="searchType == 'location'">
+				where caddress like concat('%', #{searchWord}, '%')
+			</if>
+		</if>
+	</select>
+	
+	<select id="getHospitalList" parameterType="map" resultType="HospitalDto">
+		select hsido as sido, hgugun as gugun, hname as name, haddress as address, hphone as phone
+		from hospital
+		<if test="searchWord != null and searchWord != ''">
+			<if test="searchType == 'name'">
+				where hname like concat('%', #{searchWord}, '%')
+			</if>
+			<if test="searchType == 'location'">
+				where haddress like concat('%', #{searchWord}, '%')
+			</if>
+		</if>
+	</select>
+		
+</mapper>

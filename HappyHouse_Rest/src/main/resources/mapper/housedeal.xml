@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.HouseDealMapper">
+	
+	<select id="getHouseDealInfo" parameterType="string" resultType="HouseDealDto">
+		select no, aptName, dealAmount, area, jibun, dong, floor
+		from housedeal
+		where dong = #{dong}
+		order by no
+	</select>
+	
+	<select id="getJuteakDealInfo" parameterType="string" resultType="HouseDealDto">
+		select houseName as aptName, dealAmount, area, jibun, dong, floor
+		from juteakinfo
+		where dong = #{dong}
+	</select>
+	
+	<select id="getAptNameDealInfo" parameterType="string" resultType="HouseDealDto">
+		select no, aptName, dealAmount, area, dong, jibun, floor
+		from housedeal
+		where aptName like #{aptName}
+		order by no
+	</select>
+	
+	<select id="getjuNameDealInfo" parameterType="string" resultType="HouseDealDto">
+		select houseName as aptName, dealAmount, area, dong, jibun, floor
+		from juteakinfo
+		where houseName like #{juName}
+	</select>
+		
+</mapper>
